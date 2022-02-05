@@ -1,7 +1,7 @@
 {
   "npmScope": "nasa-open-apis",
   "affected": {
-    "defaultBase": "master"
+    "defaultBase": "main"
   },
   "cli": {
     "defaultCollection": "@nrwl/nest"
