@@ -1,0 +1,52 @@
+{
+  "root": "apps/apis/mars-rover-photos",
+  "sourceRoot": "apps/apis/mars-rover-photos/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/apis/mars-rover-photos",
+        "main": "apps/apis/mars-rover-photos/src/main.ts",
+        "tsConfig": "apps/apis/mars-rover-photos/tsconfig.app.json",
+        "assets": ["apps/apis/mars-rover-photos/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/apis/mars-rover-photos/src/environments/environment.ts",
+              "with": "apps/apis/mars-rover-photos/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:execute",
+      "options": {
+        "buildTarget": "apis-mars-rover-photos:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/apis/mars-rover-photos/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/apis/mars-rover-photos"],
+      "options": {
+        "jestConfig": "apps/apis/mars-rover-photos/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
