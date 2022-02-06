@@ -1,0 +1,33 @@
+{
+  "root": "libs/shared/types/mrp-types",
+  "sourceRoot": "libs/shared/types/mrp-types/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/shared/types/mrp-types",
+        "main": "libs/shared/types/mrp-types/src/index.ts",
+        "tsConfig": "libs/shared/types/mrp-types/tsconfig.lib.json",
+        "assets": ["libs/shared/types/mrp-types/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/shared/types/mrp-types/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/types/mrp-types"],
+      "options": {
+        "jestConfig": "libs/shared/types/mrp-types/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
