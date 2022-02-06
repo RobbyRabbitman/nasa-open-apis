@@ -17,6 +17,9 @@
     "paths": {
       "@nasa-open-apis/web/api-rate-limit/api-rate-limit-data": [
         "libs/web/api-rate-limit/api-rate-limit-data/src/index.ts"
+      ],
+      "@nasa-open-apis/web/api-rate-limit/api-rate-limit-types": [
+        "libs/web/api-rate-limit/api-rate-limit-types/src/index.ts"
       ]
     }
   },
