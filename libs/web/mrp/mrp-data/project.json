@@ -1,0 +1,42 @@
+{
+  "projectType": "library",
+  "root": "libs/web/mrp/mrp-data",
+  "sourceRoot": "libs/web/mrp/mrp-data/src",
+  "prefix": "nasa-open-apis",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": ["dist/libs/web/mrp/mrp-data"],
+      "options": {
+        "project": "libs/web/mrp/mrp-data/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/web/mrp/mrp-data/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/web/mrp/mrp-data/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/web/mrp/mrp-data"],
+      "options": {
+        "jestConfig": "libs/web/mrp/mrp-data/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/mrp/mrp-data/src/**/*.ts",
+          "libs/web/mrp/mrp-data/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

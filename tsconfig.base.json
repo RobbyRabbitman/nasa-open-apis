@@ -23,7 +23,8 @@
       ],
       "@nasa-open-apis/web/api-rate-limit/api-rate-limit-types": [
         "libs/web/api-rate-limit/api-rate-limit-types/src/index.ts"
-      ]
+      ],
+      "@nasa-open-apis/web/mrp/mrp-data": ["libs/web/mrp/mrp-data/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

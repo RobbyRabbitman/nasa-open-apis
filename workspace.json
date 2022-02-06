@@ -6,6 +6,7 @@
     "web-api-rate-limit-api-rate-limit-data": "libs/web/api-rate-limit/api-rate-limit-data",
     "web-api-rate-limit-api-rate-limit-types": "libs/web/api-rate-limit/api-rate-limit-types",
     "web-mars-rover-photos": "apps/web/mars-rover-photos",
-    "web-mars-rover-photos-e2e": "apps/web/mars-rover-photos-e2e"
+    "web-mars-rover-photos-e2e": "apps/web/mars-rover-photos-e2e",
+    "web-mrp-mrp-data": "libs/web/mrp/mrp-data"
   }
 }
