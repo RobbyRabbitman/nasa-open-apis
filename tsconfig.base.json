@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@nasa-open-apis/web/api-rate-limit/api-rate-limit-data": [
+        "libs/web/api-rate-limit/api-rate-limit-data/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

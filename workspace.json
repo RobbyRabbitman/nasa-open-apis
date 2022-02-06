@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "apis-mars-rover-photos": "apps/apis/mars-rover-photos",
+    "web-api-rate-limit-api-rate-limit-data": "libs/web/api-rate-limit/api-rate-limit-data",
     "web-mars-rover-photos": "apps/web/mars-rover-photos",
     "web-mars-rover-photos-e2e": "apps/web/mars-rover-photos-e2e"
   }

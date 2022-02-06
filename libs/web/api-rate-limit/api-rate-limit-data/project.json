@@ -1,0 +1,43 @@
+{
+  "projectType": "library",
+  "root": "libs/web/api-rate-limit/api-rate-limit-data",
+  "sourceRoot": "libs/web/api-rate-limit/api-rate-limit-data/src",
+  "prefix": "nasa-open-apis",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": ["dist/libs/web/api-rate-limit/api-rate-limit-data"],
+      "options": {
+        "project": "libs/web/api-rate-limit/api-rate-limit-data/ng-package.json",
+        "tailwindConfig": "libs/web/api-rate-limit/api-rate-limit-data/tailwind.config.js"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/web/api-rate-limit/api-rate-limit-data/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/web/api-rate-limit/api-rate-limit-data/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/web/api-rate-limit/api-rate-limit-data"],
+      "options": {
+        "jestConfig": "libs/web/api-rate-limit/api-rate-limit-data/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/api-rate-limit/api-rate-limit-data/src/**/*.ts",
+          "libs/web/api-rate-limit/api-rate-limit-data/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
