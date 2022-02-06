@@ -1,10 +1,8 @@
-import { Camera } from "..";
-
-export type RoverName = "Perseverance" | "Curiosity" | "Opportunity" | "Spirit";
+import { Camera } from "./Camera";
 
 export interface Rover {
   id: number;
-  name: RoverName;
+  name: string;
   landing_date: string;
   launch_date: string;
   status: string;
