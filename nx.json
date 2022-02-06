@@ -34,11 +34,19 @@
       "style": "scss",
       "linter": "eslint",
       "unitTestRunner": "jest",
-      "e2eTestRunner": "cypress"
+      "e2eTestRunner": "cypress",
+      "addTailwind": true,
+      "standaloneConfig": true,
+      "strict": true
     },
     "@nrwl/angular:library": {
       "linter": "eslint",
-      "unitTestRunner": "jest"
+      "unitTestRunner": "jest",
+      "addTailwind": true,
+      "buildable": true,
+      "simpleModuleName": true,
+      "standaloneConfig": true,
+      "strict": true
     },
     "@nrwl/angular:component": {
       "style": "scss"
