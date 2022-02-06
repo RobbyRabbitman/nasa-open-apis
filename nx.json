@@ -50,6 +50,11 @@
     },
     "@nrwl/angular:component": {
       "style": "scss"
+    },
+    "@nrwl/workspace:library": {
+      "buildable": true,
+      "standaloneConfig": true,
+      "strict": true
     }
   }
 }
