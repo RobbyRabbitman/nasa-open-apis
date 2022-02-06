@@ -1,6 +1,8 @@
 {
   "version": 2,
   "projects": {
-    "apis-mars-rover-photos": "apps/apis/mars-rover-photos"
+    "apis-mars-rover-photos": "apps/apis/mars-rover-photos",
+    "web-mars-rover-photos": "apps/web/mars-rover-photos",
+    "web-mars-rover-photos-e2e": "apps/web/mars-rover-photos-e2e"
   }
 }

@@ -1,0 +1,97 @@
+{
+  "projectType": "application",
+  "root": "apps/web/mars-rover-photos",
+  "sourceRoot": "apps/web/mars-rover-photos/src",
+  "prefix": "mrp",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/web/mars-rover-photos",
+        "index": "apps/web/mars-rover-photos/src/index.html",
+        "main": "apps/web/mars-rover-photos/src/main.ts",
+        "polyfills": "apps/web/mars-rover-photos/src/polyfills.ts",
+        "tsConfig": "apps/web/mars-rover-photos/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/web/mars-rover-photos/src/favicon.ico",
+          "apps/web/mars-rover-photos/src/assets"
+        ],
+        "styles": ["apps/web/mars-rover-photos/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/web/mars-rover-photos/src/environments/environment.ts",
+              "with": "apps/web/mars-rover-photos/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "web-mars-rover-photos:build:production"
+        },
+        "development": {
+          "browserTarget": "web-mars-rover-photos:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "proxyConfig": "apps/web/mars-rover-photos/proxy.conf.json"
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "web-mars-rover-photos:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/web/mars-rover-photos/src/**/*.ts",
+          "apps/web/mars-rover-photos/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/web/mars-rover-photos"],
+      "options": {
+        "jestConfig": "apps/web/mars-rover-photos/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
