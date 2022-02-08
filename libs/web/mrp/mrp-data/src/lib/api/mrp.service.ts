@@ -40,9 +40,9 @@ export class MrpService {
     @Inject(MRP_API) private readonly api: string
   ) {}
 
-  public getManifestOfRover(name: string): Observable<PhotoManifest> {
+  public getManifest(rover: string): Observable<PhotoManifest> {
     return this.http
-      .get<ManifestResponse>(`${this.api}/manifests/${name}`)
+      .get<ManifestResponse>(`${this.api}/manifests/${rover}`)
       .pipe(map(({ photo_manifest }) => photo_manifest));
   }
 
@@ -52,12 +52,12 @@ export class MrpService {
       .pipe(map(({ rovers }) => rovers));
   }
 
-  public getPhotosOfRover(
-    name: string,
+  public getPhotos(
+    rover: string,
     params: GetPhotosOfRoverParams
   ): Observable<Photo[]> {
     return this.http
-      .get<PhotosResponse>(`${this.api}/rovers/${name}/photos`, { params })
+      .get<PhotosResponse>(`${this.api}/rovers/${rover}/photos`, { params })
       .pipe(map(({ photos }) => photos));
   }
 }
