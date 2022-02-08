@@ -13,7 +13,12 @@ import {
 } from "@ngxs/store";
 import { map, Observable } from "rxjs";
 import { MrpService } from "../..";
-import { GetAllRovers, GetManifest, GetPhotos } from "./mrp.actions";
+import {
+  GetAllRovers,
+  GetLatestPhotos,
+  GetManifest,
+  GetPhotos,
+} from "./mrp.actions";
 
 export const MRP_STATE_NAME = "mrp";
 
@@ -24,6 +29,7 @@ export interface MrpStateModel {
    * <rover,<date,photos>>
    */
   photos: Map<string, Map<string, Photo[]>>;
+  latestPhotos: Map<string, Photo[]>;
 }
 
 @State<MrpStateModel>({
@@ -81,6 +87,23 @@ export class MrpState {
           photos: photos.set(
             rover,
             (photos.get(rover) ?? new Map<string, Photo[]>()).set(date, res)
+          ),
+        });
+      })
+    );
+  }
+
+  @Action(GetLatestPhotos)
+  public getLatestPhotos(
+    ctx: StateContext<MrpStateModel>,
+    { rover }: GetLatestPhotos
+  ): Observable<void> {
+    return this.mrp.getLatestPhotos(rover).pipe(
+      map((latestPhotos) => {
+        ctx.patchState({
+          latestPhotos: (ctx.getState().latestPhotos ?? new Map()).set(
+            rover,
+            latestPhotos
           ),
         });
       })

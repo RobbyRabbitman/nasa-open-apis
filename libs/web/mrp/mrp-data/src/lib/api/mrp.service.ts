@@ -20,6 +20,9 @@ export interface RoversResponse {
 export interface PhotosResponse {
   photos: Photo[];
 }
+export interface LatestPhotosResponse {
+  latest_photos: Photo[];
+}
 
 interface AllPhotosOfRoverParams {
   sol?: number;
@@ -59,5 +62,11 @@ export class MrpService {
     return this.http
       .get<PhotosResponse>(`${this.api}/rovers/${rover}/photos`, { params })
       .pipe(map(({ photos }) => photos));
+  }
+
+  public getLatestPhotos(rover: string): Observable<Photo[]> {
+    return this.http
+      .get<LatestPhotosResponse>(`${this.api}/rovers/${rover}/latest_photos`)
+      .pipe(map(({ latest_photos }) => latest_photos));
   }
 }
