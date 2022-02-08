@@ -1,5 +1,9 @@
 import { Injectable } from "@angular/core";
-import { PhotoManifest, Rover } from "@nasa-open-apis/shared/types/mrp-types";
+import {
+  Photo,
+  PhotoManifest,
+  Rover,
+} from "@nasa-open-apis/shared/types/mrp-types";
 import {
   Action,
   createSelector,
@@ -9,13 +13,17 @@ import {
 } from "@ngxs/store";
 import { map, Observable } from "rxjs";
 import { MrpService } from "../..";
-import { GetAllRovers, GetManifest } from "./mrp.actions";
+import { GetAllRovers, GetManifest, GetPhotos } from "./mrp.actions";
 
 export const MRP_STATE_NAME = "mrp";
 
 export interface MrpStateModel {
   rovers: Rover[];
   manifests: Map<string, PhotoManifest>;
+  /**
+   * <rover,<date,photos>>
+   */
+  photos: Map<string, Map<string, Photo[]>>;
 }
 
 @State<MrpStateModel>({
@@ -29,6 +37,12 @@ export class MrpState {
   public static manifest(rover: string) {
     return createSelector([MrpState], (state: MrpStateModel) =>
       state?.manifests?.get(rover)
+    );
+  }
+
+  public static photos(rover: string, date: string) {
+    return createSelector([MrpState], (state: MrpStateModel) =>
+      state?.photos?.get(rover)?.get(date)
     );
   }
 
@@ -48,6 +62,25 @@ export class MrpState {
           manifests: (ctx.getState().manifests ?? new Map()).set(
             rover,
             manifest
+          ),
+        });
+      })
+    );
+  }
+
+  @Action(GetPhotos)
+  public getPhotos(
+    ctx: StateContext<MrpStateModel>,
+    { rover, date }: GetPhotos
+  ): Observable<void> {
+    return this.mrp.getPhotos(rover, { earth_date: date }).pipe(
+      map((res) => {
+        const photos =
+          ctx.getState().photos ?? new Map<string, Map<string, Photo[]>>();
+        ctx.patchState({
+          photos: photos.set(
+            rover,
+            (photos.get(rover) ?? new Map<string, Photo[]>()).set(date, res)
           ),
         });
       })
