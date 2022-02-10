@@ -1,6 +1,7 @@
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterModule } from "@angular/router";
 import { ApiRateLimitDataModule } from "@nasa-open-apis/web/api-rate-limit/api-rate-limit-data";
 import { MrpDataModule } from "@nasa-open-apis/web/mrp/mrp-data";
@@ -13,6 +14,7 @@ import { AppComponent } from "./app.component";
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     // features
     RouterModule.forRoot([
