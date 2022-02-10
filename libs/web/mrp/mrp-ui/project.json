@@ -1,0 +1,43 @@
+{
+  "projectType": "library",
+  "root": "libs/web/mrp/mrp-ui",
+  "sourceRoot": "libs/web/mrp/mrp-ui/src",
+  "prefix": "mrp-ui",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": ["dist/libs/web/mrp/mrp-ui"],
+      "options": {
+        "project": "libs/web/mrp/mrp-ui/ng-package.json",
+        "tailwindConfig": "libs/web/mrp/mrp-ui/tailwind.config.js"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/web/mrp/mrp-ui/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/web/mrp/mrp-ui/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/web/mrp/mrp-ui"],
+      "options": {
+        "jestConfig": "libs/web/mrp/mrp-ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/mrp/mrp-ui/src/**/*.ts",
+          "libs/web/mrp/mrp-ui/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

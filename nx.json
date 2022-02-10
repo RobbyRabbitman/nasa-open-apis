@@ -55,6 +55,7 @@
       "buildable": true,
       "standaloneConfig": true,
       "strict": true
-    }
+    },
+    "@nrwl/angular:component": {}
   }
 }
