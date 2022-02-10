@@ -48,7 +48,7 @@
       "standaloneConfig": true,
       "strict": true
     },
-    "@nrwl/angular:component": {
+    "@schematics/angular:component": {
       "style": "scss"
     },
     "@nrwl/workspace:library": {

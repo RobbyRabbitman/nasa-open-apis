@@ -53,8 +53,8 @@ export class MrpState {
   }
 
   @Selector()
-  public static state(state: MrpStateModel): MrpStateModel {
-    return state;
+  public static rovers({ rovers }: MrpStateModel): Rover[] {
+    return rovers;
   }
 
   @Action(GetManifest)

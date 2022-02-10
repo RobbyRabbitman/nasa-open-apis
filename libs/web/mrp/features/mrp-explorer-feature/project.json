@@ -1,0 +1,43 @@
+{
+  "projectType": "library",
+  "root": "libs/web/mrp/features/mrp-explorer-feature",
+  "sourceRoot": "libs/web/mrp/features/mrp-explorer-feature/src",
+  "prefix": "nasa-open-apis",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": ["dist/libs/web/mrp/features/mrp-explorer-feature"],
+      "options": {
+        "project": "libs/web/mrp/features/mrp-explorer-feature/ng-package.json",
+        "tailwindConfig": "libs/web/mrp/features/mrp-explorer-feature/tailwind.config.js"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/web/mrp/features/mrp-explorer-feature/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/web/mrp/features/mrp-explorer-feature/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/web/mrp/features/mrp-explorer-feature"],
+      "options": {
+        "jestConfig": "libs/web/mrp/features/mrp-explorer-feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/mrp/features/mrp-explorer-feature/src/**/*.ts",
+          "libs/web/mrp/features/mrp-explorer-feature/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
