@@ -3,6 +3,7 @@
   "projects": {
     "apis-mars-rover-photos": "apps/apis/mars-rover-photos",
     "shared-types-mrp-types": "libs/shared/types/mrp-types",
+    "shared-util": "libs/shared/util",
     "web-api-rate-limit-api-rate-limit-data": "libs/web/api-rate-limit/api-rate-limit-data",
     "web-api-rate-limit-api-rate-limit-types": "libs/web/api-rate-limit/api-rate-limit-types",
     "web-mars-rover-photos": "apps/web/mars-rover-photos",
