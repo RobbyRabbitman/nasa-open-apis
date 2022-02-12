@@ -1,1 +1,9 @@
-{{ rovers$ | async | json }}
+<section class="page flex flex-col items-center gap-4">
+  <h1>Rovers</h1>
+  <mrp-ui-rover-card
+    class="flex-initial max-w-md"
+    *ngFor="let rover of rovers$ | async"
+    [rover]="rover"
+  >
+  </mrp-ui-rover-card>
+</section>
