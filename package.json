@@ -3,9 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nx serve",
-    "build": "nx build",
-    "test": "nx test",
+    "serve:mrp": "nx run-many --target=serve --projects=apis-mars-rover-photos,web-mars-rover-photos",
     "postinstall": "ngcc --properties es2015 browser module main"
   },
   "private": true,
