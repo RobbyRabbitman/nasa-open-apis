@@ -10,4 +10,5 @@ export interface Rover {
   max_date: string;
   total_photos: number;
   cameras: Camera[];
+  image: string;
 }

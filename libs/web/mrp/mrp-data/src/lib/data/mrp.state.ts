@@ -114,7 +114,12 @@ export class MrpState {
   public getAllRovers(ctx: StateContext<MrpStateModel>): Observable<void> {
     return this.mrp.getAllRovers().pipe(
       map((rovers) => {
-        ctx.patchState({ rovers });
+        ctx.patchState({
+          rovers: rovers.map((rover) => ({
+            ...rover,
+            image: `assets/images/${rover.name.toLowerCase()}.jpg`,
+          })),
+        });
       })
     );
   }
