@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterModule } from "@angular/router";
 import { ApiRateLimitDataModule } from "@nasa-open-apis/web/api-rate-limit/api-rate-limit-data";
 import { MrpDataModule } from "@nasa-open-apis/web/mrp/mrp-data";
+import { ShellModule } from "@nasa-open-apis/web/shared/ui/shell-ui";
 import { NgxsLoggerPluginModule } from "@ngxs/logger-plugin";
 import { NgxsModule } from "@ngxs/store";
 import { environment } from "../environments/environment";
@@ -17,6 +18,8 @@ import { AppComponent } from "./app.component";
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    // Shell
+    ShellModule.init({ appName: { full: "Mars Rover Photos", short: "MRP" } }),
     // Material
     MatNativeDateModule,
     // features
