@@ -1,21 +1,34 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { Camera, Photo, Rover } from "@nasa-open-apis/shared/types/mrp-types";
 import { isNonNull } from "@nasa-open-apis/shared/util";
 import {
+  dateToString,
   GetAllRovers,
   GetPhotos,
   MrpState,
 } from "@nasa-open-apis/web/mrp/mrp-data";
-import { Select, Store } from "@ngxs/store";
+import {
+  Actions,
+  ofActionDispatched,
+  ofActionSuccessful,
+  Select,
+  Store,
+} from "@ngxs/store";
 import {
   combineLatest,
+  distinctUntilChanged,
   filter,
   map,
+  mapTo,
+  merge,
   Observable,
   shareReplay,
+  startWith,
+  Subject,
   switchMap,
+  takeUntil,
   tap,
 } from "rxjs";
 
@@ -31,8 +44,12 @@ export interface ExplorerQueryParams {
   selector: "nasa-open-apis-explorer",
   templateUrl: "./explorer.component.html",
   styleUrls: ["./explorer.component.scss"],
+  encapsulation: ViewEncapsulation.None,
 })
-export class ExplorerComponent implements OnInit {
+export class ExplorerComponent implements OnInit, OnDestroy {
+  // helper
+  private destroy$ = new Subject<void>();
+
   // form
   public readonly rover = new FormControl(undefined, Validators.required);
   public readonly date = new FormControl(undefined, Validators.required);
@@ -46,6 +63,10 @@ export class ExplorerComponent implements OnInit {
   public rovers$!: Observable<Rover[]>;
 
   public photos$!: Observable<Photo[]>;
+  public loadingPhotos$ = merge(
+    this.actions$.pipe(ofActionDispatched(GetPhotos), mapTo(true)),
+    this.actions$.pipe(ofActionSuccessful(GetPhotos), mapTo(false))
+  ).pipe(startWith(false), shareReplay(1));
 
   public rover$ = this.rover.valueChanges.pipe(
     switchMap((name) =>
@@ -63,7 +84,8 @@ export class ExplorerComponent implements OnInit {
 
   constructor(
     public readonly store: Store,
-    private readonly route: ActivatedRoute
+    private readonly route: ActivatedRoute,
+    private readonly actions$: Actions
   ) {}
 
   ngOnInit(): void {
@@ -71,13 +93,19 @@ export class ExplorerComponent implements OnInit {
 
     this.photos$ = combineLatest([
       this.form.valueChanges.pipe(
+        distinctUntilChanged(
+          (prev, curr) =>
+            prev.rover === curr.rover &&
+            dateToString(prev.date) === dateToString(curr.date)
+        ),
         filter(() => this.form.valid),
         switchMap(() =>
           this.store.dispatch(new GetPhotos(this.rover.value, this.date.value))
         ),
         switchMap(() =>
           this.store.select(MrpState.photos(this.rover.value, this.date.value))
-        )
+        ),
+        shareReplay(1)
       ),
       this.cameras.valueChanges.pipe(
         map((cameras: Camera[]) => cameras.map(({ name }) => name))
@@ -85,15 +113,24 @@ export class ExplorerComponent implements OnInit {
     ]).pipe(
       map(([photos, cameras]) =>
         photos.filter((photo) => cameras.includes(photo.camera.name))
-      )
+      ),
+      shareReplay(1)
     );
 
     // set form values, if passed
     this.rovers$
-      .pipe(switchMap(() => this.route.queryParams))
+      .pipe(
+        switchMap(() => this.route.queryParams),
+        takeUntil(this.destroy$)
+      )
       .subscribe(({ rover, date }: ExplorerQueryParams) => {
         isNonNull(rover) ? this.rover.setValue(rover) : undefined;
         isNonNull(date) ? this.date.setValue(new Date(date)) : undefined;
       });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

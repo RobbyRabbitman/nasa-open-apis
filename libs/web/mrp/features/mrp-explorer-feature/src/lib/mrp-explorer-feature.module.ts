@@ -6,12 +6,12 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatSelectModule } from "@angular/material/select";
 import { MrpUiModule } from "@nasa-open-apis/web/mrp/mrp-ui";
 import { ExplorerComponent } from "./pages/explorer/explorer.component";
 import { RoversComponent } from "./pages/rovers/rovers.component";
 import { MrpExplorerRoutingModule } from "./routes/mrp-explorer-routing.module";
-
 @NgModule({
   declarations: [ExplorerComponent, RoversComponent],
   imports: [
@@ -22,6 +22,7 @@ import { MrpExplorerRoutingModule } from "./routes/mrp-explorer-routing.module";
     MatSelectModule,
     MatCheckboxModule,
     MatDatepickerModule,
+    MatProgressSpinnerModule,
     MrpUiModule,
     MrpExplorerRoutingModule,
     ReactiveFormsModule,
