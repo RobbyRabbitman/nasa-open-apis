@@ -82,6 +82,9 @@ export class ExplorerComponent implements OnInit, OnDestroy {
     shareReplay(1)
   );
 
+  public min$ = this.rover$.pipe(map((rover) => new Date(rover.landing_date)));
+  public max$ = this.rover$.pipe(map((rover) => new Date(rover.max_date)));
+
   constructor(
     public readonly store: Store,
     private readonly route: ActivatedRoute,
@@ -98,7 +101,8 @@ export class ExplorerComponent implements OnInit, OnDestroy {
             prev.rover === curr.rover &&
             dateToString(prev.date) === dateToString(curr.date)
         ),
-        filter(() => this.form.valid),
+        // after cd894caa81e8258528d7a611020c46f6dda590a5 this.form.valid doesnt work, date with time outside range w/e ???
+        filter(() => isNonNull(this.rover.value) && isNonNull(this.date.value)),
         switchMap(() =>
           this.store.dispatch(new GetPhotos(this.rover.value, this.date.value))
         ),
@@ -120,6 +124,7 @@ export class ExplorerComponent implements OnInit, OnDestroy {
     // set form values, if passed
     this.rovers$
       .pipe(
+        filter(isNonNull),
         switchMap(() => this.route.queryParams),
         takeUntil(this.destroy$)
       )
