@@ -1,0 +1,13 @@
+<mat-card *ngIf="photo">
+  <img
+    loading="lazy"
+    mat-card-image
+    [src]="photo.img_src"
+    alt="Photo of Mars"
+  />
+  <mat-card-content>
+    <p class="flex gap-4 items-center">
+      <mat-icon>camera</mat-icon> {{ photo.camera.full_name }}
+    </p>
+  </mat-card-content>
+</mat-card>
