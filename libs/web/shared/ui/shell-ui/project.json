@@ -1,0 +1,42 @@
+{
+  "projectType": "library",
+  "root": "libs/web/shared/ui/shell-ui",
+  "sourceRoot": "libs/web/shared/ui/shell-ui/src",
+  "prefix": "nasa-open-apis",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": ["dist/libs/web/shared/ui/shell-ui"],
+      "options": {
+        "project": "libs/web/shared/ui/shell-ui/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/web/shared/ui/shell-ui/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/web/shared/ui/shell-ui/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/web/shared/ui/shell-ui"],
+      "options": {
+        "jestConfig": "libs/web/shared/ui/shell-ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/shared/ui/shell-ui/src/**/*.ts",
+          "libs/web/shared/ui/shell-ui/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

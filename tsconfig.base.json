@@ -31,7 +31,10 @@
       "@nasa-open-apis/web/mrp/mrp-data": [
         "libs/web/mrp/mrp-data/src/index.ts"
       ],
-      "@nasa-open-apis/web/mrp/mrp-ui": ["libs/web/mrp/mrp-ui/src/index.ts"]
+      "@nasa-open-apis/web/mrp/mrp-ui": ["libs/web/mrp/mrp-ui/src/index.ts"],
+      "@nasa-open-apis/web/shared/ui/shell-ui": [
+        "libs/web/shared/ui/shell-ui/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
