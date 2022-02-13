@@ -47,8 +47,6 @@ $web-mars-rover-photos-theme: mat.define-light-theme(
   }
 }
 
-/* You can add global styles to this file, and also import other style files */
-
 html,
 body {
   height: 100%;
@@ -56,4 +54,11 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.bg-primary-contrast {
+  background: mat.get-color-from-palette(
+    $web-mars-rover-photos-primary,
+    "default-contrast"
+  );
 }
