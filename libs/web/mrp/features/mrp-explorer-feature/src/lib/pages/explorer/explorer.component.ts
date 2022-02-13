@@ -52,7 +52,10 @@ export class ExplorerComponent implements OnInit {
       this.rovers$.pipe(
         filter(isNonNull),
         map((rovers) => rovers.find((rover) => rover.name === name) as Rover),
-        tap((rover) => this.cameras.setValue(rover.cameras))
+        tap((rover) => {
+          this.cameras.setValue(rover.cameras);
+          this.date.setValue(new Date(rover.max_date));
+        })
       )
     ),
     shareReplay(1)
