@@ -24,6 +24,8 @@
         autocomplete="off"
         matInput
         [matDatepicker]="picker"
+        [min]="(rover$ | async)?.landing_date"
+        [max]="(rover$ | async)?.max_date"
       />
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
