@@ -6,8 +6,14 @@
     alt="Photo of Mars"
   />
   <mat-card-content>
-    <p class="flex gap-4 items-center">
-      <mat-icon>camera</mat-icon> {{ photo.camera.full_name }}
-    </p>
+    <mat-list>
+      <mat-list-item>
+        <mat-icon mat-list-icon>camera</mat-icon>
+        <span mat-line>
+          <strong>{{ photo.camera.name }}</strong>
+        </span>
+        <span mat-line>{{ photo.camera.full_name }}</span>
+      </mat-list-item>
+    </mat-list>
   </mat-card-content>
 </mat-card>
