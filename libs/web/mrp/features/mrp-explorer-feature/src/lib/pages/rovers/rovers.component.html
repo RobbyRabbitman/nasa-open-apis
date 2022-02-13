@@ -5,5 +5,8 @@
     *ngFor="let rover of rovers$ | async"
     [rover]="rover"
   >
+    <button mat-raised-button color="primary" (click)="explore(rover)">
+      Explore Photos
+    </button>
   </mrp-ui-rover-card>
 </section>
