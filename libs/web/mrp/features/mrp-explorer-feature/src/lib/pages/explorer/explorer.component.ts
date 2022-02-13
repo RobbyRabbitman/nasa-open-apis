@@ -51,9 +51,9 @@ export class ExplorerComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
   // form
-  public readonly rover = new FormControl(undefined, Validators.required);
-  public readonly date = new FormControl(undefined, Validators.required);
-  public readonly cameras = new FormControl(undefined);
+  public readonly rover = new FormControl(null, Validators.required);
+  public readonly date = new FormControl(null, Validators.required);
+  public readonly cameras = new FormControl(null);
   public readonly form = new FormGroup({
     rover: this.rover,
     date: this.date,
