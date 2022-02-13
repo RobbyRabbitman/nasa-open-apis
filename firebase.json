@@ -1,0 +1,13 @@
+{
+  "hosting": {
+    "public": "dist/apps/web/mars-rover-photos",
+    "target": "explore-mars-photos",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

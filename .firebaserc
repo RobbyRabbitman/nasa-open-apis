@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "nasa-open-apis"
+  },
+  "targets": {
+    "nasa-open-apis": {
+      "hosting": {
+        "explore-mars-photos": [
+          "explore-mars-photos"
+        ]
+      }
+    }
+  }
+}
