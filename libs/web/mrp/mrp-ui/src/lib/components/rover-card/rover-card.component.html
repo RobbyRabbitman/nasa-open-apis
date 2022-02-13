@@ -12,33 +12,31 @@
     <mat-list>
       <mat-list-item>
         <mat-icon matListIcon>task</mat-icon>
-        <span matLine>Mission status</span>
         <span matLine>
-          <strong>{{ rover.status }}</strong>
+          <strong>Mission status</strong>
         </span>
+        <span matLine>{{ rover.status }}</span>
       </mat-list-item>
       <mat-list-item>
         <mat-icon matListIcon>rocket_launch</mat-icon>
-        <span matLine>Flight Time</span>
+        <span matLine><strong>Flight Time</strong></span>
         <span matLine>
-          <strong>
-            {{ rover.launch_date | date }} -
-            {{ rover.landing_date | date }}
-          </strong>
+          {{ rover.launch_date | date }} -
+          {{ rover.landing_date | date }}
         </span>
       </mat-list-item>
       <mat-list-item>
         <mat-icon matListIcon>photo_library</mat-icon>
-        <span matLine>Latest photos</span>
+        <span matLine><strong>Latest photos</strong></span>
         <span matLine>
-          <strong>{{ rover.max_date | date }}</strong>
+          {{ rover.max_date | date }}
         </span>
       </mat-list-item>
       <mat-list-item>
         <mat-icon matListIcon>camera</mat-icon>
-        <span matLine>Cameras</span>
+        <span matLine><strong>Cameras</strong></span>
         <span matLine>
-          <strong>{{ rover.cameras.length | number }}</strong>
+          {{ rover.cameras.length | number }}
         </span>
       </mat-list-item>
     </mat-list>
