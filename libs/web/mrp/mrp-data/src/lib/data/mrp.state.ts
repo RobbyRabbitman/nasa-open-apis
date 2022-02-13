@@ -12,7 +12,7 @@ import {
   StateContext,
 } from "@ngxs/store";
 import { map, Observable } from "rxjs";
-import { MrpService } from "../..";
+import { dateToString, MrpService } from "../..";
 import {
   GetAllRovers,
   GetLatestPhotos,
@@ -46,9 +46,11 @@ export class MrpState {
     );
   }
 
-  public static photos(rover: string, date: string) {
-    return createSelector([MrpState], (state: MrpStateModel) =>
-      state?.photos?.get(rover)?.get(date)
+  public static photos(rover: string, date: Date) {
+    return createSelector(
+      [MrpState],
+      (state: MrpStateModel) =>
+        state?.photos?.get(rover)?.get(dateToString(date)) ?? []
     );
   }
 
@@ -86,7 +88,10 @@ export class MrpState {
         ctx.patchState({
           photos: photos.set(
             rover,
-            (photos.get(rover) ?? new Map<string, Photo[]>()).set(date, res)
+            (photos.get(rover) ?? new Map<string, Photo[]>()).set(
+              dateToString(date),
+              res
+            )
           ),
         });
       })

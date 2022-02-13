@@ -5,6 +5,7 @@ import {
   PhotoManifest,
   Rover,
 } from "@nasa-open-apis/shared/types/mrp-types";
+import { isNonNull, removeNullish } from "@nasa-open-apis/shared/util";
 import { map, Observable } from "rxjs";
 
 export const MRP_API = new InjectionToken<string>("Mars Rover Photos api");
@@ -30,10 +31,23 @@ interface AllPhotosOfRoverParams {
   camera?: string;
 }
 
-export type GetPhotosOfRoverParams =
-  | Omit<AllPhotosOfRoverParams, "sol">
-  | Omit<AllPhotosOfRoverParams, "earth_date">;
+export interface GetPhotosOfRoverParams
+  extends Omit<AllPhotosOfRoverParams, "earth_date"> {
+  earth_date?: Date;
+}
 
+/** mrp api uses this format
+ *
+ * @param date
+ * @returns yyyy-mm-dd
+ */
+export function dateToString(date: Date): string {
+  return [
+    date.getFullYear(),
+    ("0" + (date.getMonth() + 1)).slice(-2),
+    ("0" + date.getDate()).slice(-2),
+  ].join("-");
+}
 @Injectable({
   providedIn: "root",
 })
@@ -57,10 +71,14 @@ export class MrpService {
 
   public getPhotos(
     rover: string,
-    params: GetPhotosOfRoverParams
+    { earth_date, ...rest }: GetPhotosOfRoverParams
   ): Observable<Photo[]> {
+    const params = removeNullish(rest);
+    if (isNonNull(earth_date)) params.earth_date = dateToString(earth_date);
     return this.http
-      .get<PhotosResponse>(`${this.api}/rovers/${rover}/photos`, { params })
+      .get<PhotosResponse>(`${this.api}/rovers/${rover}/photos`, {
+        params,
+      })
       .pipe(map(({ photos }) => photos));
   }
 

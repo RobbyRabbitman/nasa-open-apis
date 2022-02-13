@@ -9,7 +9,7 @@ export class GetPhotos {
   public static readonly type = "[GetManifest] Get Photos";
   public constructor(
     public readonly rover: string,
-    public readonly date: string
+    public readonly date: Date
   ) {}
 }
 export class GetLatestPhotos {
