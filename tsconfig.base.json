@@ -18,6 +18,9 @@
       "@nasa-open-apis/shared/types/mrp-types": [
         "libs/shared/types/mrp-types/src/index.ts"
       ],
+      "@nasa-open-apis/shared/types/neo-types": [
+        "libs/shared/types/neo-types/src/index.ts"
+      ],
       "@nasa-open-apis/shared/util": ["libs/shared/util/src/index.ts"],
       "@nasa-open-apis/web/api-rate-limit/api-rate-limit-data": [
         "libs/web/api-rate-limit/api-rate-limit-data/src/index.ts"

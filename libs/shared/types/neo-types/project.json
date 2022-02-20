@@ -1,0 +1,33 @@
+{
+  "root": "libs/shared/types/neo-types",
+  "sourceRoot": "libs/shared/types/neo-types/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/shared/types/neo-types",
+        "main": "libs/shared/types/neo-types/src/index.ts",
+        "tsConfig": "libs/shared/types/neo-types/tsconfig.lib.json",
+        "assets": ["libs/shared/types/neo-types/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/shared/types/neo-types/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/types/neo-types"],
+      "options": {
+        "jestConfig": "libs/shared/types/neo-types/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
