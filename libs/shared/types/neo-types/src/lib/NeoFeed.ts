@@ -6,10 +6,10 @@ import { NeoLinks } from "./NeoLinks";
 /**
  * keys are date strings (YYYY-MM-DD)
  */
-export type NeoDateMap = { [key: string]: Neo[] };
+export type NeoFeedObject = { [key: string]: Neo[] };
 
 export interface NeoFeed {
   links: NeoLinks;
   element_count: number;
-  near_earth_objects: NeoDateMap;
+  near_earth_objects: NeoFeedObject;
 }

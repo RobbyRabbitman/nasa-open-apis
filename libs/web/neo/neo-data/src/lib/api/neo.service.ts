@@ -9,6 +9,20 @@ import { Observable } from "rxjs";
 
 export const NEO_API = new InjectionToken<string>("Near Earth Object api");
 
+//TODO mrp uses this also => util?
+/** neo api uses this format
+ *
+ * @param date
+ * @returns yyyy-mm-dd
+ */
+export function dateToString(date: Date): string {
+  return [
+    date.getFullYear(),
+    ("0" + (date.getMonth() + 1)).slice(-2),
+    ("0" + date.getDate()).slice(-2),
+  ].join("-");
+}
+
 @Injectable({
   providedIn: "root",
 })
@@ -22,26 +36,19 @@ export class NeoService {
     return this.http.get<Neo>(`${this.api}/neo/${id}`);
   }
 
-  /**
-   *
-   * @param start_date YYYY-MM-DD
-   * @param end_date YYYY-MM-DD
-   * @param detailed
-   * @returns
-   */
-  public feed(
-    start_date: string,
-    end_date: string,
-    detailed: boolean = false
-  ): Observable<NeoFeed> {
+  public feed(start: Date, end: Date, detailed: boolean): Observable<NeoFeed> {
     return this.http.get<NeoFeed>(`${this.api}/feed`, {
-      params: { start_date, end_date, detailed },
+      params: {
+        start_date: dateToString(start),
+        end_date: dateToString(end),
+        detailed,
+      },
     });
   }
 
-  public browse(page: number = 0, size: number = 20): Observable<NeoBrowse> {
+  public browse(page: number): Observable<NeoBrowse> {
     return this.http.get<NeoBrowse>(`${this.api}/neo/browse`, {
-      params: { page, size },
+      params: { page },
     });
   }
 }
