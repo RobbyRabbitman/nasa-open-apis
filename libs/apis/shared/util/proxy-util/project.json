@@ -1,0 +1,34 @@
+{
+  "root": "libs/apis/shared/util/proxy-util",
+  "sourceRoot": "libs/apis/shared/util/proxy-util/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:package",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/apis/shared/util/proxy-util",
+        "tsConfig": "libs/apis/shared/util/proxy-util/tsconfig.lib.json",
+        "packageJson": "libs/apis/shared/util/proxy-util/package.json",
+        "main": "libs/apis/shared/util/proxy-util/src/index.ts",
+        "assets": ["libs/apis/shared/util/proxy-util/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/apis/shared/util/proxy-util/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/apis/shared/util/proxy-util"],
+      "options": {
+        "jestConfig": "libs/apis/shared/util/proxy-util/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

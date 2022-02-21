@@ -15,6 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@nasa-open-apis/apis/shared/util/proxy-util": [
+        "libs/apis/shared/util/proxy-util/src/index.ts"
+      ],
       "@nasa-open-apis/shared/types/mrp-types": [
         "libs/shared/types/mrp-types/src/index.ts"
       ],
