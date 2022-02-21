@@ -57,5 +57,6 @@
       "strict": true
     },
     "@nrwl/angular:component": {}
-  }
+  },
+  "defaultProject": "apis-neo"
 }

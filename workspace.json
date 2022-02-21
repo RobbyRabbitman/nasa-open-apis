@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "apis-mars-rover-photos": "apps/apis/mars-rover-photos",
+    "apis-neo": "apps/apis/neo",
     "apis-shared-util-proxy-util": "libs/apis/shared/util/proxy-util",
     "shared-types-mrp-types": "libs/shared/types/mrp-types",
     "shared-types-neo-types": "libs/shared/types/neo-types",
