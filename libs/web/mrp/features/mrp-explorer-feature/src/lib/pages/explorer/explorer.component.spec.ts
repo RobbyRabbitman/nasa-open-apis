@@ -1,16 +1,14 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ExplorerComponent } from "./explorer.component";
 
-import { ExplorerComponent } from './explorer.component';
-
-describe('ExplorerComponent', () => {
+describe("ExplorerComponent", () => {
   let component: ExplorerComponent;
   let fixture: ComponentFixture<ExplorerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ExplorerComponent ]
-    })
-    .compileComponents();
+      declarations: [ExplorerComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -19,7 +17,7 @@ describe('ExplorerComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

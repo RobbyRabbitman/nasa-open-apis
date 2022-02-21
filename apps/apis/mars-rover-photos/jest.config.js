@@ -1,15 +1,15 @@
 module.exports = {
-  displayName: 'apis-mars-rover-photos',
-  preset: '../../../jest.preset.js',
+  displayName: "apis-mars-rover-photos",
+  preset: "../../../jest.preset.js",
   globals: {
-    'ts-jest': {
-      tsconfig: '<rootDir>/tsconfig.spec.json',
+    "ts-jest": {
+      tsconfig: "<rootDir>/tsconfig.spec.json",
     },
   },
-  testEnvironment: 'node',
+  testEnvironment: "node",
   transform: {
-    '^.+\\.[tj]s$': 'ts-jest',
+    "^.+\\.[tj]s$": "ts-jest",
   },
-  moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../../coverage/apps/apis/mars-rover-photos',
+  moduleFileExtensions: ["ts", "js", "html"],
+  coverageDirectory: "../../../coverage/apps/apis/mars-rover-photos",
 };
