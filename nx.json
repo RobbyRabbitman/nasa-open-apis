@@ -56,7 +56,9 @@
       "standaloneConfig": true,
       "strict": true
     },
-    "@nrwl/angular:component": {}
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
   },
   "defaultProject": "apis-neo"
 }

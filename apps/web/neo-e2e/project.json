@@ -1,0 +1,28 @@
+{
+  "root": "apps/web/neo-e2e",
+  "sourceRoot": "apps/web/neo-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/web/neo-e2e/cypress.json",
+        "devServerTarget": "web-neo:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "web-neo:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/web/neo-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["web-neo"]
+}

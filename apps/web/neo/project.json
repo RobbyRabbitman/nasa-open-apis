@@ -1,0 +1,94 @@
+{
+  "projectType": "application",
+  "root": "apps/web/neo",
+  "sourceRoot": "apps/web/neo/src",
+  "prefix": "neo",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/web/neo",
+        "index": "apps/web/neo/src/index.html",
+        "main": "apps/web/neo/src/main.ts",
+        "polyfills": "apps/web/neo/src/polyfills.ts",
+        "tsConfig": "apps/web/neo/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": ["apps/web/neo/src/favicon.ico", "apps/web/neo/src/assets"],
+        "styles": ["apps/web/neo/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/web/neo/src/environments/environment.ts",
+              "with": "apps/web/neo/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "web-neo:build:production"
+        },
+        "development": {
+          "browserTarget": "web-neo:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "proxyConfig": "apps/web/neo/proxy.conf.json"
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "web-neo:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/web/neo/src/**/*.ts",
+          "apps/web/neo/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/web/neo"],
+      "options": {
+        "jestConfig": "apps/web/neo/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
