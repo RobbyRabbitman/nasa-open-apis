@@ -13,6 +13,7 @@
     "web-mrp-features-mrp-explorer-feature": "libs/web/mrp/features/mrp-explorer-feature",
     "web-mrp-mrp-data": "libs/web/mrp/mrp-data",
     "web-mrp-mrp-ui": "libs/web/mrp/mrp-ui",
+    "web-neo-neo-data": "libs/web/neo/neo-data",
     "web-shared-ui-shell-ui": "libs/web/shared/ui/shell-ui"
   }
 }
