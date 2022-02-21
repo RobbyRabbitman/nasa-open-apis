@@ -1,6 +1,6 @@
-import { Environment } from './environment.model';
+import { Environment } from "./environment.model";
 
 export const environment: Environment = {
   production: false,
-  target: 'https://api.nasa.gov/mars-photos',
+  target: "https://api.nasa.gov/mars-photos/api",
 };
