@@ -35,7 +35,6 @@ export class BrowseComponent implements AfterViewInit {
   public columns = [
     "name",
     "is_potentially_hazardous_asteroid",
-    "is_sentry_object",
     "estimated_diameter",
   ];
   public browse$!: Observable<NeoBrowse>;
