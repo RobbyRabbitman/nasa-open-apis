@@ -1,0 +1,43 @@
+{
+  "projectType": "library",
+  "root": "libs/web/neo/features/neo-browse-feature",
+  "sourceRoot": "libs/web/neo/features/neo-browse-feature/src",
+  "prefix": "neo",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": ["dist/libs/web/neo/features/neo-browse-feature"],
+      "options": {
+        "project": "libs/web/neo/features/neo-browse-feature/ng-package.json",
+        "tailwindConfig": "libs/web/neo/features/neo-browse-feature/tailwind.config.js"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/web/neo/features/neo-browse-feature/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/web/neo/features/neo-browse-feature/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/web/neo/features/neo-browse-feature"],
+      "options": {
+        "jestConfig": "libs/web/neo/features/neo-browse-feature/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/neo/features/neo-browse-feature/src/**/*.ts",
+          "libs/web/neo/features/neo-browse-feature/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
