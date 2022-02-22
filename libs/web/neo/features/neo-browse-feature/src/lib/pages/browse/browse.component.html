@@ -16,14 +16,35 @@
         <td mat-cell *matCellDef="let neo">{{ neo.name }}</td>
       </ng-container>
       <ng-container matColumnDef="is_potentially_hazardous_asteroid">
-        <th mat-header-cell *matHeaderCellDef>Is potentially hazardous</th>
+        <th mat-header-cell *matHeaderCellDef>Is likely harmless</th>
         <td mat-cell *matCellDef="let neo">
-          {{ neo.is_potentially_hazardous_asteroid }}
+          <mat-icon *ngIf="neo.is_potentially_hazardous_asteroid" color="warn">
+            question_mark
+          </mat-icon>
+          <mat-icon
+            *ngIf="!neo.is_potentially_hazardous_asteroid"
+            color="primary"
+          >
+            verified
+          </mat-icon>
         </td>
       </ng-container>
       <ng-container matColumnDef="is_sentry_object">
         <th mat-header-cell *matHeaderCellDef>Is sentry object</th>
-        <td mat-cell *matCellDef="let neo">{{ neo.is_sentry_object }}</td>
+        <td mat-cell *matCellDef="let neo">
+          <!-- TODO success over primary -->
+          <mat-icon
+            [color]="
+              neo.is_potentially_hazardous_asteroid
+                ? neo.is_sentry_object
+                  ? 'primary'
+                  : 'warn'
+                : ''
+            "
+          >
+            {{ neo.is_sentry_object ? "videocam" : "videocam_off" }}
+          </mat-icon>
+        </td>
       </ng-container>
       <ng-container matColumnDef="estimated_diameter">
         <th mat-header-cell *matHeaderCellDef>Max. estimated diameter</th>
