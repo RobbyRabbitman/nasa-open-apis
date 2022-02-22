@@ -25,7 +25,15 @@
         <th mat-header-cell *matHeaderCellDef>Is sentry object</th>
         <td mat-cell *matCellDef="let neo">{{ neo.is_sentry_object }}</td>
       </ng-container>
-
+      <ng-container matColumnDef="estimated_diameter">
+        <th mat-header-cell *matHeaderCellDef>Max. estimated diameter</th>
+        <td mat-cell *matCellDef="let neo">
+          {{
+            neo.estimated_diameter.kilometers.estimated_diameter_max | number
+          }}
+          km
+        </td>
+      </ng-container>
       <tr mat-header-row *matHeaderRowDef="columns"></tr>
       <tr mat-row *matRowDef="let row; columns: columns"></tr>
     </table>
