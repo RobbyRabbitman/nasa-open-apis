@@ -36,6 +36,16 @@ $web-neo-theme: mat.define-light-theme(
 
 @tailwind utilities;
 
+@layer utilities {
+  .page {
+    @apply p-4;
+  }
+}
+
+.backdrop {
+  background: rgba(0, 0, 0, 0.15);
+}
+
 /* You can add global styles to this file, and also import other style files */
 
 html,

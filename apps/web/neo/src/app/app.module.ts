@@ -23,7 +23,16 @@ import { AppComponent } from "./app.component";
     // Material
     MatNativeDateModule,
     // features
-    RouterModule.forRoot([{ path: "**", redirectTo: "", pathMatch: "full" }]),
+    RouterModule.forRoot([
+      {
+        path: "browse",
+        loadChildren: () =>
+          import("@nasa-open-apis/web/neo/features/neo-browse-feature").then(
+            (module) => module.NeoBrowseFeatureModule
+          ),
+      },
+      { path: "**", redirectTo: "browse", pathMatch: "full" },
+    ]),
     // ngxs
     NgxsModule.forRoot([], { developmentMode: !environment.production }),
     NeoDataModule.init(environment.api),
