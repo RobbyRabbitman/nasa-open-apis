@@ -1,5 +1,8 @@
-<section class="page">
-  <section class="relative">
+<section
+  class="md:px-8 py-4 absolute top-0 right-0 bottom-0 left-0 flex flex-col items-center"
+>
+  <h1>Browse</h1>
+  <section class="relative flex-auto w-full max-w-5xl">
     <div
       *ngIf="(loading$ | async) === true"
       class="absolute z-[1] top-0 right-0 bottom-0 left-0 flex flex-col items-center justify-center backdrop"
@@ -8,8 +11,7 @@
     </div>
     <table
       mat-table
-      [ngClass]="{ 'h-80': (browse$ | async) === null }"
-      class="w-full"
+      class="w-full h-full"
       [dataSource]="(browse$ | async)?.near_earth_objects ?? []"
     >
       <ng-container matColumnDef="name">
@@ -61,6 +63,7 @@
     </table>
   </section>
   <mat-paginator
+    class="w-full max-w-5xl"
     [length]="length$ | async"
     [pageSizeOptions]="[20]"
     showFirstLastButtons
