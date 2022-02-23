@@ -8,6 +8,7 @@
     </div>
     <table
       mat-table
+      [ngClass]="{ 'h-80': (browse$ | async) === null }"
       class="w-full"
       [dataSource]="(browse$ | async)?.near_earth_objects ?? []"
     >
