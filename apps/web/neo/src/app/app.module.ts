@@ -31,6 +31,13 @@ import { AppComponent } from "./app.component";
             (module) => module.NeoBrowseFeatureModule
           ),
       },
+      {
+        path: "neo",
+        loadChildren: () =>
+          import("@nasa-open-apis/web/neo/features/neo-feature").then(
+            (module) => module.NeoFeatureModule
+          ),
+      },
       { path: "**", redirectTo: "browse", pathMatch: "full" },
     ]),
     // ngxs

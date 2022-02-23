@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Neo, NeoBrowse } from "@nasa-open-apis/shared/types/neo-types";
-import { Action, State, StateContext } from "@ngxs/store";
+import { Action, createSelector, State, StateContext } from "@ngxs/store";
 import { map, Observable } from "rxjs";
 import { NeoService } from "../api/neo.service";
 import { NeoGetBrowse, NeoGetFeed, NeoGetObject } from "./neo.actions";
@@ -28,6 +28,12 @@ export interface NeoStateModel {
 @Injectable()
 export class NeoState {
   public constructor(private readonly api: NeoService) {}
+
+  public static neo(id: string) {
+    return createSelector([NeoState], (state: NeoStateModel) =>
+      state.neo.get(id)
+    );
+  }
 
   @Action(NeoGetBrowse)
   public browse(

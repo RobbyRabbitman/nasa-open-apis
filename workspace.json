@@ -17,6 +17,7 @@
     "web-neo": "apps/web/neo",
     "web-neo-e2e": "apps/web/neo-e2e",
     "web-neo-features-neo-browse-feature": "libs/web/neo/features/neo-browse-feature",
+    "web-neo-features-neo-feature": "libs/web/neo/features/neo-feature",
     "web-neo-neo-data": "libs/web/neo/neo-data",
     "web-shared-ui-shell-ui": "libs/web/shared/ui/shell-ui"
   }
