@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, ViewChild } from "@angular/core";
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { NeoBrowse } from "@nasa-open-apis/shared/types/neo-types";
 import { isNonNull } from "@nasa-open-apis/shared/util";
@@ -22,7 +28,9 @@ import {
   Observable,
   shareReplay,
   startWith,
+  Subject,
   switchMap,
+  takeUntil,
   tap,
 } from "rxjs";
 
@@ -31,7 +39,9 @@ import {
   templateUrl: "./browse.component.html",
   styleUrls: ["./browse.component.scss"],
 })
-export class BrowseComponent implements AfterViewInit {
+export class BrowseComponent implements OnInit, AfterViewInit, OnDestroy {
+  private destroy$ = new Subject<void>();
+
   public columns = [
     "name",
     "is_potentially_hazardous_asteroid",
@@ -41,7 +51,7 @@ export class BrowseComponent implements AfterViewInit {
   public length$!: Observable<number>;
   public size$!: Observable<number[]>;
 
-  @ViewChild(MatPaginator)
+  @ViewChild(MatPaginator, { static: true })
   public paginator!: MatPaginator;
 
   public loading$!: Observable<boolean>;
@@ -51,7 +61,7 @@ export class BrowseComponent implements AfterViewInit {
     private readonly actions$: Actions
   ) {}
 
-  public ngAfterViewInit() {
+  public ngOnInit() {
     this.browse$ = combineLatest([
       this.paginator.page.pipe(
         shareReplay(1),
@@ -75,11 +85,20 @@ export class BrowseComponent implements AfterViewInit {
       filter(isNonNull),
       shareReplay(1)
     );
+
     this.length$ = this.browse$.pipe(
       map((browse) => browse.page.total_elements)
     );
-    this.size$ = this.browse$.pipe(map((browse) => [browse.page.size]));
 
+    this.browse$
+      .pipe(
+        map((browse) => browse.page.size),
+        takeUntil(this.destroy$)
+      )
+      .subscribe({ next: (size) => (this.paginator.pageSize = size) });
+  }
+
+  public ngAfterViewInit(): void {
     this.loading$ = merge(
       this.paginator.page.pipe(
         map(({ pageIndex }) => pageIndex),
@@ -92,5 +111,10 @@ export class BrowseComponent implements AfterViewInit {
       this.actions$.pipe(ofActionDispatched(NeoGetBrowse), mapTo(true)),
       this.actions$.pipe(ofActionSuccessful(NeoGetBrowse), mapTo(false))
     ).pipe(shareReplay(1));
+  }
+
+  public ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
