@@ -1,10 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from "@angular/core";
+import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { NeoBrowse } from "@nasa-open-apis/shared/types/neo-types";
 import { isNonNull } from "@nasa-open-apis/shared/util";
@@ -39,7 +33,7 @@ import {
   templateUrl: "./browse.component.html",
   styleUrls: ["./browse.component.scss"],
 })
-export class BrowseComponent implements OnInit, AfterViewInit, OnDestroy {
+export class BrowseComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
   public columns = [
@@ -96,12 +90,11 @@ export class BrowseComponent implements OnInit, AfterViewInit, OnDestroy {
         takeUntil(this.destroy$)
       )
       .subscribe({ next: (size) => (this.paginator.pageSize = size) });
-  }
 
-  public ngAfterViewInit(): void {
     this.loading$ = merge(
       this.paginator.page.pipe(
         map(({ pageIndex }) => pageIndex),
+        startWith(0),
         switchMap((page) =>
           this.store
             .selectOnce<NeoStateModel>(NeoState)
