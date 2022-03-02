@@ -15,7 +15,6 @@ import {
   Store,
 } from "@ngxs/store";
 import {
-  combineLatest,
   concat,
   filter,
   map,
@@ -59,32 +58,25 @@ export class BrowseComponent implements OnInit, OnDestroy {
   ) {}
 
   public ngOnInit() {
-    this.browse$ = combineLatest([
-      concat(
-        this.store
-          .selectOnce<NeoStateModel>(NeoState)
-          .pipe(map(({ page }) => page)),
-        this.paginator.page.pipe(
-          shareReplay(1),
-          map(({ pageIndex }) => pageIndex),
-          tap((page) => this.store.dispatch(new NeoSetPage(page)))
-        )
-      ).pipe(
-        tap((page) =>
-          this.store.selectOnce<NeoStateModel>(NeoState).subscribe({
-            next: ({ browse }) =>
-              !browse.has(page)
-                ? this.store.dispatch(new NeoGetBrowse(page))
-                : undefined,
-          })
-        )
-      ),
-      this.store.select<NeoStateModel>(NeoState).pipe(
+    this.browse$ = concat(
+      this.store
+        .selectOnce<NeoStateModel>(NeoState)
+        .pipe(map(({ page }) => page)),
+      this.paginator.page.pipe(
         shareReplay(1),
-        map(({ browse }) => browse)
+        map(({ pageIndex }) => pageIndex),
+        tap((page) => this.store.dispatch(new NeoSetPage(page)))
+      )
+    ).pipe(
+      tap((page) =>
+        this.store.selectOnce<NeoStateModel>(NeoState).subscribe({
+          next: ({ browse }) =>
+            !browse.has(page)
+              ? this.store.dispatch(new NeoGetBrowse(page))
+              : undefined,
+        })
       ),
-    ]).pipe(
-      map(([page, map]) => map.get(page)),
+      switchMap((page) => this.store.select(NeoState.browse(page))),
       filter(isNonNull),
       shareReplay(1)
     );
