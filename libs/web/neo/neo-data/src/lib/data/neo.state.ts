@@ -42,6 +42,12 @@ export class NeoState {
     );
   }
 
+  public static browse(page: number) {
+    return createSelector([NeoState], (state: NeoStateModel) =>
+      state.browse.get(page)
+    );
+  }
+
   @Action(NeoGetBrowse)
   public browse(
     ctx: StateContext<NeoStateModel>,
