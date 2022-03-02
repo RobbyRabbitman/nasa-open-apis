@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { NeoBrowse } from "@nasa-open-apis/shared/types/neo-types";
 import { isNonNull } from "@nasa-open-apis/shared/util";
@@ -23,9 +23,7 @@ import {
   Observable,
   shareReplay,
   startWith,
-  Subject,
   switchMap,
-  takeUntil,
   tap,
 } from "rxjs";
 
@@ -34,9 +32,7 @@ import {
   templateUrl: "./browse.component.html",
   styleUrls: ["./browse.component.scss"],
 })
-export class BrowseComponent implements OnInit, OnDestroy {
-  private destroy$ = new Subject<void>();
-
+export class BrowseComponent implements OnInit {
   public columns = [
     "name",
     "is_potentially_hazardous_asteroid",
@@ -45,6 +41,7 @@ export class BrowseComponent implements OnInit, OnDestroy {
   public browse$!: Observable<NeoBrowse>;
   public length$!: Observable<number>;
   public page$!: Observable<number>;
+  public pageSize$!: Observable<number>;
   public size$!: Observable<number[]>;
 
   @ViewChild(MatPaginator, { static: true })
@@ -90,12 +87,10 @@ export class BrowseComponent implements OnInit, OnDestroy {
       shareReplay(1)
     );
 
-    this.browse$
-      .pipe(
-        map((browse) => browse.page.size),
-        takeUntil(this.destroy$)
-      )
-      .subscribe({ next: (size) => (this.paginator.pageSize = size) });
+    this.pageSize$ = this.browse$.pipe(
+      map((browse) => browse.page.size),
+      shareReplay(1)
+    );
 
     this.loading$ = merge(
       this.paginator.page.pipe(
@@ -110,10 +105,5 @@ export class BrowseComponent implements OnInit, OnDestroy {
       this.actions$.pipe(ofActionDispatched(NeoGetBrowse), mapTo(true)),
       this.actions$.pipe(ofActionSuccessful(NeoGetBrowse), mapTo(false))
     ).pipe(shareReplay(1));
-  }
-
-  public ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 }
