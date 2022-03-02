@@ -74,6 +74,7 @@
   <mat-paginator
     class="w-full max-w-5xl"
     [length]="length$ | async"
+    [pageIndex]="page$ | async"
     showFirstLastButtons
   >
   </mat-paginator>

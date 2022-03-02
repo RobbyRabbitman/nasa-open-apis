@@ -4,6 +4,7 @@ import { NeoBrowse } from "@nasa-open-apis/shared/types/neo-types";
 import { isNonNull } from "@nasa-open-apis/shared/util";
 import {
   NeoGetBrowse,
+  NeoSetPage,
   NeoState,
   NeoStateModel,
 } from "@nasa-open-apis/web/neo/neo-data";
@@ -15,6 +16,7 @@ import {
 } from "@ngxs/store";
 import {
   combineLatest,
+  concat,
   filter,
   map,
   mapTo,
@@ -43,6 +45,7 @@ export class BrowseComponent implements OnInit, OnDestroy {
   ];
   public browse$!: Observable<NeoBrowse>;
   public length$!: Observable<number>;
+  public page$!: Observable<number>;
   public size$!: Observable<number[]>;
 
   @ViewChild(MatPaginator, { static: true })
@@ -57,10 +60,16 @@ export class BrowseComponent implements OnInit, OnDestroy {
 
   public ngOnInit() {
     this.browse$ = combineLatest([
-      this.paginator.page.pipe(
-        shareReplay(1),
-        map(({ pageIndex }) => pageIndex),
-        startWith(0),
+      concat(
+        this.store
+          .selectOnce<NeoStateModel>(NeoState)
+          .pipe(map(({ page }) => page)),
+        this.paginator.page.pipe(
+          shareReplay(1),
+          map(({ pageIndex }) => pageIndex),
+          tap((page) => this.store.dispatch(new NeoSetPage(page)))
+        )
+      ).pipe(
         tap((page) =>
           this.store.selectOnce<NeoStateModel>(NeoState).subscribe({
             next: ({ browse }) =>
@@ -82,6 +91,11 @@ export class BrowseComponent implements OnInit, OnDestroy {
 
     this.length$ = this.browse$.pipe(
       map((browse) => browse.page.total_elements)
+    );
+
+    this.page$ = this.store.select<NeoStateModel>(NeoState).pipe(
+      map(({ page }) => page),
+      shareReplay(1)
     );
 
     this.browse$

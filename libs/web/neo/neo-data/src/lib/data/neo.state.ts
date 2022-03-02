@@ -1,9 +1,14 @@
 import { Injectable } from "@angular/core";
 import { Neo, NeoBrowse } from "@nasa-open-apis/shared/types/neo-types";
 import { Action, createSelector, State, StateContext } from "@ngxs/store";
-import { map, Observable } from "rxjs";
+import { map, mapTo, Observable, of } from "rxjs";
 import { NeoService } from "../api/neo.service";
-import { NeoGetBrowse, NeoGetFeed, NeoGetObject } from "./neo.actions";
+import {
+  NeoGetBrowse,
+  NeoGetFeed,
+  NeoGetObject,
+  NeoSetPage,
+} from "./neo.actions";
 
 export const NEO_STATE_NAME = "neo";
 
@@ -13,6 +18,7 @@ export type NeoMap = Map<string, Neo>;
 
 export interface NeoStateModel {
   browse: NeoBrowseMap;
+  page: number;
   feed: NeoFeedMap;
   neo: NeoMap;
 }
@@ -21,6 +27,7 @@ export interface NeoStateModel {
   name: NEO_STATE_NAME,
   defaults: {
     browse: new Map<number, NeoBrowse>(),
+    page: 0,
     feed: new Map<string, Neo[]>(),
     neo: new Map<string, Neo>(),
   },
@@ -47,6 +54,18 @@ export class NeoState {
         });
       })
     );
+  }
+
+  @Action(NeoSetPage)
+  public setPAge(
+    ctx: StateContext<NeoStateModel>,
+    { page }: NeoSetPage
+  ): Observable<void> {
+    return of(
+      ctx.patchState({
+        page,
+      })
+    ).pipe(mapTo(undefined));
   }
 
   @Action(NeoGetFeed)

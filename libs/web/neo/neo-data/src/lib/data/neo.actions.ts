@@ -2,6 +2,10 @@ export class NeoGetBrowse {
   public static readonly type = "[NeoBrowsePage] Get Browse";
   public constructor(public readonly page: number) {}
 }
+export class NeoSetPage {
+  public static readonly type = "[NeoBrowsePage] Set page";
+  public constructor(public readonly page: number) {}
+}
 
 export class NeoGetFeed {
   public static readonly type = "[NeoGetFeed] Get Feed";
