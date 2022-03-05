@@ -22,7 +22,6 @@ import {
   merge,
   Observable,
   shareReplay,
-  startWith,
   switchMap,
   tap,
 } from "rxjs";
@@ -33,21 +32,42 @@ import {
   styleUrls: ["./browse.component.scss"],
 })
 export class BrowseComponent implements OnInit {
+  /**
+   * Controls which columns get displayed.
+   */
   public columns = [
     "name",
     "is_potentially_hazardous_asteroid",
     "estimated_diameter",
   ];
+
+  /**
+   * The data this component displays.
+   */
   public browse$!: Observable<NeoBrowse>;
-  public length$!: Observable<number>;
+
+  /**
+   * Total NEOs.
+   */
+  public total$!: Observable<number>;
+
+  /**
+   * Current page of the paginator.
+   */
   public page$!: Observable<number>;
+
+  /**
+   * NEOs per page of the paginator.
+   */
   public pageSize$!: Observable<number>;
-  public size$!: Observable<number[]>;
+
+  /**
+   * Indicates whether a NEO Browse is loading.
+   */
+  public loading$!: Observable<boolean>;
 
   @ViewChild(MatPaginator, { static: true })
-  public paginator!: MatPaginator;
-
-  public loading$!: Observable<boolean>;
+  private paginator!: MatPaginator;
 
   constructor(
     public readonly store: Store,
@@ -55,6 +75,10 @@ export class BrowseComponent implements OnInit {
   ) {}
 
   public ngOnInit() {
+    /**
+     * Get Browse via page event of paginator, start with page from store.
+     * Sync store page with paginator page. Fetches a page only once cuz performance.
+     */
     this.browse$ = concat(
       this.store
         .selectOnce<NeoStateModel>(NeoState)
@@ -78,7 +102,7 @@ export class BrowseComponent implements OnInit {
       shareReplay(1)
     );
 
-    this.length$ = this.browse$.pipe(
+    this.total$ = this.browse$.pipe(
       map((browse) => browse.page.total_elements)
     );
 
@@ -93,9 +117,12 @@ export class BrowseComponent implements OnInit {
     );
 
     this.loading$ = merge(
-      this.paginator.page.pipe(
-        map(({ pageIndex }) => pageIndex),
-        startWith(0),
+      concat(
+        this.store
+          .selectOnce<NeoStateModel>(NeoState)
+          .pipe(map(({ page }) => page)),
+        this.paginator.page.pipe(map(({ pageIndex }) => pageIndex))
+      ).pipe(
         switchMap((page) =>
           this.store
             .selectOnce<NeoStateModel>(NeoState)

@@ -73,7 +73,7 @@
   </section>
   <mat-paginator
     class="w-full max-w-5xl"
-    [length]="length$ | async"
+    [length]="total$ | async"
     [pageIndex]="page$ | async"
     [pageSize]="pageSize$ | async"
     showFirstLastButtons
