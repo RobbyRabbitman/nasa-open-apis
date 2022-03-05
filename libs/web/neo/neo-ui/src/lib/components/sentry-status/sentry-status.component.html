@@ -1,0 +1,9 @@
+<ng-container *ngIf="neo">
+  <neo-ui-is-sentry-object-badge [neo]="neo"> </neo-ui-is-sentry-object-badge>
+  <div class="flex-auto flex flex-col">
+    <span class="font-bold">Is sentry object</span>
+    <span>
+      {{ neo.is_sentry_object ? "yes" : "no" }}
+    </span>
+  </div>
+</ng-container>
