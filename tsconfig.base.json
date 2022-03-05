@@ -47,6 +47,7 @@
       "@nasa-open-apis/web/neo/neo-data": [
         "libs/web/neo/neo-data/src/index.ts"
       ],
+      "@nasa-open-apis/web/neo/neo-ui": ["libs/web/neo/neo-ui/src/index.ts"],
       "@nasa-open-apis/web/shared/ui/shell-ui": [
         "libs/web/shared/ui/shell-ui/src/index.ts"
       ]

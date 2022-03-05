@@ -19,6 +19,7 @@
     "web-neo-features-neo-browse-feature": "libs/web/neo/features/neo-browse-feature",
     "web-neo-features-neo-feature": "libs/web/neo/features/neo-feature",
     "web-neo-neo-data": "libs/web/neo/neo-data",
+    "web-neo-neo-ui": "libs/web/neo/neo-ui",
     "web-shared-ui-shell-ui": "libs/web/shared/ui/shell-ui"
   }
 }

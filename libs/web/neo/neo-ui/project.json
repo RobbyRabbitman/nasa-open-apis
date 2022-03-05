@@ -1,0 +1,43 @@
+{
+  "projectType": "library",
+  "root": "libs/web/neo/neo-ui",
+  "sourceRoot": "libs/web/neo/neo-ui/src",
+  "prefix": "neo-ui",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": ["dist/libs/web/neo/neo-ui"],
+      "options": {
+        "project": "libs/web/neo/neo-ui/ng-package.json",
+        "tailwindConfig": "libs/web/neo/neo-ui/tailwind.config.js"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/web/neo/neo-ui/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/web/neo/neo-ui/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/web/neo/neo-ui"],
+      "options": {
+        "jestConfig": "libs/web/neo/neo-ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/neo/neo-ui/src/**/*.ts",
+          "libs/web/neo/neo-ui/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
