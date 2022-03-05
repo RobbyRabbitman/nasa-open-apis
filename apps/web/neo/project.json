@@ -14,7 +14,15 @@
         "polyfills": "apps/web/neo/src/polyfills.ts",
         "tsConfig": "apps/web/neo/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/web/neo/src/favicon.ico", "apps/web/neo/src/assets"],
+        "assets": [
+          "apps/web/neo/src/favicon.ico",
+          "apps/web/neo/src/assets",
+          {
+            "input": "libs/web/neo/neo-ui/src/assets",
+            "glob": "**/*",
+            "output": "./assets"
+          }
+        ],
         "styles": ["apps/web/neo/src/styles.scss"],
         "scripts": []
       },
