@@ -2,8 +2,18 @@
   <mat-card>
     <mat-card-header>
       <mat-card-title>
-        {{ neo.name }}
+        <span class="flex items-center">
+          {{ neo.name }} &nbsp;
+          <neo-ui-is-harmless-badge [neo]="neo"></neo-ui-is-harmless-badge>
+        </span>
       </mat-card-title>
+      <mat-card-subtitle>
+        {{
+          neo.is_potentially_hazardous_asteroid
+            ? "potentially hazardous"
+            : "likely harmless"
+        }}
+      </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <neo-ui-estimated-diameter [neo]="neo"></neo-ui-estimated-diameter>

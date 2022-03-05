@@ -5,6 +5,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatTableModule } from "@angular/material/table";
+import { NeoUiModule } from "@nasa-open-apis/web/neo/neo-ui";
 import { BrowseComponent } from "./pages/browse/browse.component";
 import { NeoBrowseRoutingModule } from "./routes/neo-browse-routing.module";
 
@@ -12,6 +13,7 @@ import { NeoBrowseRoutingModule } from "./routes/neo-browse-routing.module";
   imports: [
     CommonModule,
     NeoBrowseRoutingModule,
+    NeoUiModule,
     MatTableModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,

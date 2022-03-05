@@ -30,15 +30,7 @@
       <ng-container matColumnDef="is_potentially_hazardous_asteroid">
         <th mat-header-cell *matHeaderCellDef>Is likely harmless</th>
         <td mat-cell *matCellDef="let neo">
-          <mat-icon *ngIf="neo.is_potentially_hazardous_asteroid" color="warn">
-            warning
-          </mat-icon>
-          <mat-icon
-            *ngIf="!neo.is_potentially_hazardous_asteroid"
-            color="primary"
-          >
-            verified
-          </mat-icon>
+          <neo-ui-is-harmless-badge [neo]="neo"></neo-ui-is-harmless-badge>
         </td>
       </ng-container>
       <ng-container matColumnDef="is_sentry_object">
