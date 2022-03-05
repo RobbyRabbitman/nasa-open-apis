@@ -1,0 +1,6 @@
+<mat-icon
+  *ngIf="neo"
+  [color]="neo.is_potentially_hazardous_asteroid ? 'warn' : 'primary'"
+>
+  {{ neo.is_potentially_hazardous_asteroid ? "warning" : "verified" }}
+</mat-icon>
