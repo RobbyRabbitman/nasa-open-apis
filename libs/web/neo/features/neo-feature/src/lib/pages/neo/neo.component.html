@@ -1,11 +1,9 @@
 <section *ngIf="neo$ | async as neo" class="flex flex-col p-4 gap-4">
   <mat-card>
     <mat-card-header>
-      <mat-card-title>
-        <span class="flex items-center">
-          {{ neo.name }} &nbsp;
-          <neo-ui-is-harmless-badge [neo]="neo"></neo-ui-is-harmless-badge>
-        </span>
+      <mat-card-title class="!flex items-center gap-2">
+        {{ neo.name }}
+        <neo-ui-is-harmless-badge [neo]="neo"></neo-ui-is-harmless-badge>
       </mat-card-title>
       <mat-card-subtitle>
         {{
@@ -15,7 +13,8 @@
         }}
       </mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content>
+    <mat-card-content class="!flex flex-col gap-4">
+      <neo-ui-sentry-status [neo]="neo"> </neo-ui-sentry-status>
       <neo-ui-estimated-diameter [neo]="neo"></neo-ui-estimated-diameter>
     </mat-card-content>
   </mat-card>
